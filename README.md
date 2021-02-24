@@ -1,12 +1,12 @@
 # Building a video search system based on Milvus
 
-This article shows how to use the image feature extraction model VGG and the vector search engine Milvus to build an video search system.
+This article shows how to use VGG, an image feature extraction model and Milvus, the vector search engine to build a video search system.
 
-## 1 System Introduction
+## 1 System Overview
 
-The entire workflow of the video search system can be represented by the following picture:
+The image below shows the entire workflow of the video search system.
 
-![img](https://qqadapt.qpic.cn/txdocpic/0/96877aa0daf30039febde63551da6667/0?w=1830&h=394)When importing video, first use the OpenCV algorithm library to cut a frame of a video in the incoming system, then use the feature extraction model VGG to extract the vectors of these key frame pictures, and then import the extracted vectors into Milvus. For the original video, Minio is used for storage, and then Redis is used to store the correspondence between video and vector.
+![img](https://qqadapt.qpic.cn/txdocpic/0/96877aa0daf30039febde63551da6667/0?w=1830&h=394)To import videos, first, use the OpenCV algorithm library to cut a frame of a video in the incoming system. Then use VGG, the feature extraction model to extract the vectors of these key frame images, and then import the extracted vectors into Milvus. For the original video, Minio is used for storage, and then Redis is used to store the correspondence between video and vector.
 
 When searching for video, first use the same VGG model to convert the uploaded image into a feature vector, then take this vector to Milvus to perform similar vector search, find the most similar vectors, and then use the vectors stored in Redis. The corresponding relationship with the video is to take the video from Minio and return it to the front-end interface.
 
